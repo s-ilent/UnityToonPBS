@@ -89,7 +89,6 @@ Shader "Sinbad/ToonPBS/StandardSpecular"
 
             #pragma vertex vertBase
             #pragma fragment fragBase
-            #define SINBAD_TOON_BANDS 3
             #include "SinbadPBSToonLighting.cginc"
             #include "UnityStandardCoreForward.cginc"
 
@@ -126,7 +125,6 @@ Shader "Sinbad/ToonPBS/StandardSpecular"
 
             #pragma vertex vertAdd
             #pragma fragment fragAdd
-            #define SINBAD_TOON_BANDS 3
             #include "SinbadPBSToonLighting.cginc"
             #include "UnityStandardCoreForward.cginc"
 

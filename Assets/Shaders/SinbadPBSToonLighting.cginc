@@ -64,9 +64,9 @@ half4 SinbadToonBRDF1_PBS (half3 diffColor, half3 specColor, half oneMinusReflec
     half lh = saturate(dot(light.dir, halfDir));
 
     // Toonify
-    nl = SinbadToon(nl, 0.01);
-    nv = SinbadToon(nv, 0.01);
-    lh = SinbadToon(lh, 0.01);
+    nl = SinbadToon(nl, max(.01, smoothness*0.05));
+    nv = SinbadToon(nv, max(.5, smoothness));
+    lh = SinbadToon(lh, 0.5);
 
     // Diffuse term
     half diffuseTerm = DisneyDiffuse(nv, nl, lh, perceptualRoughness) * nl;
@@ -131,7 +131,7 @@ half4 SinbadToonBRDF2_PBS (half3 diffColor, half3 specColor, half oneMinusReflec
 
     // Toonify
     nl = SinbadToon(nl, 0.01);
-    nv = SinbadToon(nv, 0.01);
+    nv = SinbadToon(nv, max(.5, smoothness));
 
     // Specular term
     half perceptualRoughness = SmoothnessToPerceptualRoughness (smoothness);
@@ -220,7 +220,7 @@ half4 SinbadToonBRDF3_PBS (half3 diffColor, half3 specColor, half oneMinusReflec
 
     // Toonify
     nl = SinbadToon(nl, 0.01);
-    nv = SinbadToon(nv, 0.01);
+    nv = SinbadToon(nv, max(.5, smoothness));
 
     // Vectorize Pow4 to save instructions
     half2 rlPow4AndFresnelTerm = Pow4 (half2(dot(reflDir, light.dir), 1-nv));  // use R.L instead of N.H to save couple of instructions
